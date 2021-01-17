@@ -1,2 +1,3 @@
-nose
-sphinx
+#nose
+#sphinx
+geopy  # by default though?
