@@ -1,23 +1,28 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+from distance import __version__
 
 
 with open('README.rst') as f:
-    readme = f.read()
+  readme = f.read()
 
 with open('LICENSE') as f:
-    license = f.read()
+  license = f.read()
 
 setup(
-    name='distance',
-    version='0.1.0',
-    description='Sample package for Python-Guide.org',
-    long_description=readme,
-    author='Aaron Schroeder',
-    #author_email='me@kennethreitz.com',
-    url='https://github.com/aaron-schroeder/py-distance',
-    license=license,
-    packages=find_packages(exclude=('tests', 'docs'))
+  name='distance',
+  version=__version__,
+  description='Sample package for Python-Guide.org',
+  long_description=readme,
+  author='Aaron Schroeder',
+  #author_email='me@kennethreitz.com',
+  install_requires = [
+    numpy,
+    pandas
+  ]
+  url='https://github.com/aaron-schroeder/py-distance',
+  license=license,
+  packages=find_packages(exclude=('tests', 'docs'))
 )
 

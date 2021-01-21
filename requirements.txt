@@ -1,3 +1,5 @@
 #nose
 #sphinx
-geopy  # by default though?
+# geopy  # by default though?
+numpy
+pandas
