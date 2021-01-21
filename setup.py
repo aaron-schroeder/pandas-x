@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
-from distance import __version__
+#from distance import __version__
 
 
 with open('README.rst') as f:
@@ -12,7 +12,8 @@ with open('LICENSE') as f:
 
 setup(
   name='distance',
-  version=__version__,
+  version=0.0.1,
+  #version=__version__,
   description='Sample package for Python-Guide.org',
   long_description=readme,
   author='Aaron Schroeder',
