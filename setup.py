@@ -20,7 +20,7 @@ setup(
   install_requires = [
     numpy,
     pandas
-  ]
+  ],
   url='https://github.com/aaron-schroeder/py-distance',
   license=license,
   packages=find_packages(exclude=('tests', 'docs'))
