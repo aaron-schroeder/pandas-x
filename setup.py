@@ -19,8 +19,8 @@ setup(
   author='Aaron Schroeder',
   #author_email='me@kennethreitz.com',
   install_requires = [
-    numpy,
-    pandas
+    'numpy',
+    'pandas',
   ],
   url='https://github.com/aaron-schroeder/py-distance',
   license=license,
