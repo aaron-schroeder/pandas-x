@@ -39,7 +39,7 @@ pkg_name = 'distance'
 
 setup(
   name=pkg_name,
-  version=version=get_version('%s/__init__.py' % pkg_name),
+  version=get_version('%s/__init__.py' % pkg_name),
   description='description placeholder',
   long_description=readme,
   author='Aaron Schroeder',
