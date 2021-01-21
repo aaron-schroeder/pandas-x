@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+from .version import version
 #from distance import __version__
 
 
@@ -12,8 +13,9 @@ with open('LICENSE') as f:
 
 setup(
   name='distance',
-  version='0.0.1',
+  version=version,
   #version=__version__,
+  #version='0.0.1',
   description='Sample package for Python-Guide.org',
   long_description=readme,
   author='Aaron Schroeder',
