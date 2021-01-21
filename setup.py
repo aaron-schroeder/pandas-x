@@ -12,7 +12,7 @@ with open('LICENSE') as f:
 
 setup(
   name='distance',
-  version=0.0.1,
+  version='0.0.1',
   #version=__version__,
   description='Sample package for Python-Guide.org',
   long_description=readme,
