@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
-from .version import version
+from version import version
 #from distance import __version__
 
 
