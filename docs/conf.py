@@ -4,26 +4,29 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+from datetime import datetime
+import inspect
+import os
+import sys
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
-from distance import __version__
-project = 'py-distance'
-copyright = '2021, Aaron Schroeder'
+import pandas_x
+project = 'pandas-x'
+copyright = f'2020-{datetime.now().year}, Aaron Schroeder'
 author = 'Aaron Schroeder'
 
 # The short X.Y version.
-version = __version__
+version = pandas_x.__version__
 
 # The full version, including alpha/beta/rc tags
 release = version
@@ -36,8 +39,11 @@ release = version
 # ones.
 extensions = [
   'sphinx.ext.autodoc',
+  'sphinx.ext.autosummary',
+  'sphinx_autosummary_accessors',
   'sphinx.ext.napoleon',
   'sphinx.ext.todo',
+  'sphinx.ext.linkcode',
 ]
 
 # Napoleon options
@@ -48,12 +54,19 @@ extensions = [
 #napoleon_use_ivar = True
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+import sphinx_autosummary_accessors
+templates_path = ['_templates', sphinx_autosummary_accessors.templates_path]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+# autodoc options
+add_module_names = True
+
+# autosummary options
+autosummary_generate = True
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -61,9 +74,64 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+# html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# based on pandas doc/source/conf.py
+def linkcode_resolve(domain, info):
+  """Determine the URL corresponding to Python object"""
+  if domain != 'py':
+    return None
+
+  modname = info['module']
+  fullname = info['fullname']
+
+  submod = sys.modules.get(modname)
+  if submod is None:
+    return None
+
+  obj = submod
+  for part in fullname.split('.'):
+    try:
+      obj = getattr(obj, part)
+    except AttributeError:
+      return None
+
+  try:
+    fn = inspect.getsourcefile(inspect.unwrap(obj))
+  except TypeError:
+    fn = None
+  if not fn:
+    return None
+
+  try:
+    source, lineno = inspect.getsourcelines(obj)
+  except OSError:
+    lineno = None
+
+  if lineno:
+    linespec = f'#L{lineno}-L{lineno + len(source) - 1}'
+  else:
+    linespec = ''
+
+  fn = os.path.relpath(fn, start=os.path.dirname(pandas_x.__file__))
+
+  # if '+' in pandas_x.__version__:
+  #     return f"https://github.com/pandas-dev/pandas/blob/master/pandas/{fn}{linespec}"
+  # else:
+  return (
+      f'https://github.com/aaron-schroeder/pandas-x/blob/'
+      f'master/distance/{fn}{linespec}'
+      # f'v{pandas_x.__version__}/distance/{fn}{linespec}'
+  )
+
+
+# meant to add custom css to allow tables to wrap
+def setup(app):
+  # app.add_javascript('custom.js')
+  app.add_css_file('custom.css')

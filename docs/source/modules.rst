@@ -1,7 +1,9 @@
-distance
+pandas_x
 ========
 
 .. toctree::
    :maxdepth: 4
 
-   distance
+   pos
+   algorithms
+   scalar

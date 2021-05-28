@@ -1,10 +1,32 @@
+from ._decorators import docsub
+
 # Define avg Earth radius in meters according to International
 # Union of Geodesy and Geophysics.
 EARTH_RADIUS_METERS = 6371E3
+# EARTH_RADIUS_METERS = 6371009  # exactly what ``geopy``` uses
 
 
+_docstring_text= """
+Args:
+  lon1 (float): longitude coordinate of start point in degrees E (-180, 180)
+  lat1 (float): latitude coordinate of start point in degrees N (-90, 90)
+  lon2 (float): longitude coordinate of end point in degrees E (-180, 180)
+  lat2 (float): latitude coordinate of end point in degrees N (-90, 90)
+Returns:
+  float: distance from point 1 to point 2 in meters.
+
+"""
+
+
+@docsub(
+  _docstring_text
+)
 def great_circle(lon1, lat1, lon2, lat2):
+  """
+  Calculate point-to-point distances using great circle.
+  """
   from math import sin, cos, asin, radians, sqrt
+
   lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
   dlon = lon2 - lon1
   dlat = lat2 - lat1
@@ -19,10 +41,14 @@ def great_circle(lon1, lat1, lon2, lat2):
 
   return d
 
-
-def flat_earth(lon1, lat1, lon2, lat2):
-  """Just using Cartesian coordinates."""
-  from math import sin, cos, asin, radians
+@docsub(
+  _docstring_text
+)
+def cartesian(lon1, lat1, lon2, lat2):
+  """
+  Calculate point-to-point distance using cartesian coordinates.
+  """
+  from math import cos, radians
   lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
 
   # Could simplify this by defining a single cos for the entire rt.
@@ -32,8 +58,3 @@ def flat_earth(lon1, lat1, lon2, lat2):
 
   return (dx ** 2 + dy ** 2) ** 0.5
 
-
-def great_circle_geopy(lon1, lat1, lon2, lat2):
-  import geopy
-
-  return geopy.distance.great_circle((lat1, lon1), (lat2, lon2))

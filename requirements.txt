@@ -1,5 +1,2 @@
-#nose
-#sphinx
-# geopy  # by default though?
-numpy
-pandas
+numpy>=1.19.5
+pandas>=1.2.0

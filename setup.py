@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 def read(rel_path):
@@ -29,28 +29,35 @@ def get_version(rel_path):
   raise RuntimeError('Unable to find version string.')
 
 
-with open('README.rst') as f:
+with open('README.md') as f:
   readme = f.read()
 
 with open('LICENSE') as f:
   license = f.read()
 
-# Could this be outsourced somehow? find_packages maybe?
-pkg_name = 'distance'
+pkg_name = 'pandas_x'
 
 setup(
-  name=pkg_name,
-  version=get_version('%s/__init__.py' % pkg_name),
-  description='description placeholder',
+  name='pandas-x',
+  version=get_version(f'{pkg_name}/__init__.py'),
+  description='GPS distance calculation accessor for pandas DataFrames.',
   long_description=readme,
+  long_description_content_type='text/markdown',
   author='Aaron Schroeder',
-  #author_email='me@kennethreitz.com',
+  author_email='aaron@trailzealot.com',
   install_requires = [
     'numpy',
     'pandas',
   ],
-  url='https://github.com/aaron-schroeder/py-distance',
-  license=license,
-  packages=find_packages(exclude=('tests', 'docs'))
+  url='https://github.com/aaron-schroeder/pandas-x',
+  license='MIT License',
+  # license_files=('LICENSE',),
+  packages=[pkg_name],
+  classifiers=[
+    'License :: OSI Approved :: MIT License',
+    'Intended Audience :: Developers',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.7',
+  ]
 )
 
