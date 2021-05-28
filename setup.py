@@ -53,7 +53,7 @@ setup(
   ],
   url='https://github.com/aaron-schroeder/pandas-x',
   project_urls={
-    'Documentation': 'https://pandas-x.readthedocs.io/en/v{version}/',
+    'Documentation': f'https://pandas-x.readthedocs.io/en/v{version}/',
   },
   license='MIT',
   # license_files=('LICENSE',),
