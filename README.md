@@ -52,4 +52,4 @@ file for details.
 
 ## Documentation
 
-The official documentation is hosted at readthedocs: https://pandas-x.readthedocs.io/en/stable
+The official documentation is hosted at readthedocs: https://pandas-x.readthedocs.io/stable/

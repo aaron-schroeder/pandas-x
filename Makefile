@@ -22,7 +22,7 @@ testpublish:
 	# python setup.py bdist_wheel
 	python setup.py sdist bdist_wheel
 	twine check dist/*
-	# twine upload -r testpypi dist/*
+	twine upload -r testpypi dist/*
 	# $(MAKE) clean
 
 # clean-pyc:

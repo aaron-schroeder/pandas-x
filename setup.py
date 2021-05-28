@@ -40,7 +40,7 @@ pkg_name = 'pandas_x'
 setup(
   name='pandas-x',
   version=get_version(f'{pkg_name}/__init__.py'),
-  description='GPS distance calculation accessor for pandas DataFrames.',
+  description='GPS/position calculation accessor for pandas DataFrames.',
   long_description=readme,
   long_description_content_type='text/markdown',
   author='Aaron Schroeder',
@@ -50,7 +50,10 @@ setup(
     'pandas',
   ],
   url='https://github.com/aaron-schroeder/pandas-x',
-  license='MIT License',
+  project_urls={
+    'Documentation': 'https://pandas-x.readthedocs.io',
+  },
+  license='MIT',
   # license_files=('LICENSE',),
   packages=[pkg_name],
   classifiers=[
