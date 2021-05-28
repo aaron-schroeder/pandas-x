@@ -126,8 +126,8 @@ def linkcode_resolve(domain, info):
   # else:
   return (
       f'https://github.com/aaron-schroeder/pandas-x/blob/'
-      f'master/distance/{fn}{linespec}'
-      # f'v{pandas_x.__version__}/distance/{fn}{linespec}'
+      # f'master/distance/{fn}{linespec}'
+      f'v{pandas_x.__version__}/pandas_x/{fn}{linespec}'
   )
 
 
