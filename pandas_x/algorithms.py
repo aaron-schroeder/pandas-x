@@ -50,6 +50,7 @@ _docstring_params = dict(
   pre_return_desc='',
 )
 
+
 def _clean_series(series):
   if series.isna().all():
     raise ValueError(
@@ -92,6 +93,15 @@ def ds_from_xy(lat, lon):
 
   # Remove the NaN value in the first position.
   return ds.fillna(0.)
+
+
+@docsub(
+  **_docstring_params,
+  klass_out='pandas.Series',
+)
+@doc('distance')
+def s_from_xy(lat, lon):
+  return s_from_ds(ds_from_xy(lat, lon))
 
 
 @docsub(

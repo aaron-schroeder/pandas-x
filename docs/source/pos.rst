@@ -21,6 +21,7 @@ Position methods
   pandas.DataFrame.pos.ds_from_xy
   pandas.DataFrame.pos.ds_from_s
   pandas.DataFrame.pos.s_from_ds
+  pandas.DataFrame.pos.s_from_xy
   pandas.DataFrame.pos.s_from_v
   pandas.DataFrame.pos.v_from_ds
   pandas.DataFrame.pos.v_from_s

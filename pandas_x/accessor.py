@@ -161,6 +161,7 @@ for function in [
   algs.v_from_s,
   algs.v_from_ds,
   algs.ds_from_xy,
+  algs.s_from_xy,
   algs.reduced_point_index,
 ]:
   PositionAccessor._add_series_method(function)

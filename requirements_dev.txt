@@ -1,5 +1,6 @@
 docutils<0.17
 geopy>=2.1.0
+ipython>=7.24.0
 numpy>=1.19.5
 pandas>=1.2.0
 sphinx>=3.4.3

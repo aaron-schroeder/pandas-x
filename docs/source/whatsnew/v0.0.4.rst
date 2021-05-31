@@ -1,0 +1,28 @@
+.. _whatsnew_040:
+
+What's new in 0.0.4 (May 31, 2021)
+----------------------------------
+
+Enhancements
+~~~~~~~~~~~~
+
+.. _whatsnew_040.s_from_xy:
+
+Cumulative distance from GPS coordinates
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Added :meth:`~pandas.DataFrame.pos.s_from_xy` to calculate distance from latitude-longitude.
+
+.. ipython:: python
+
+  df = pd.DataFrame({'lat': [40.0, 40.1, 40.2], 'lon': [-105, -105, -105]})
+  df.pos.s_from_xy()
+
+
+.. _whatsnew_040.docs:
+
+Documentation changes
+~~~~~~~~~~~~~~~~~~~~~
+
+- Added the :ref:`release` section, which you are currently looking at!
+- Added the ipython directive to sphinx to allow examples.

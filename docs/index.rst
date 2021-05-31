@@ -11,6 +11,7 @@ Welcome to pandas-x's documentation!
    :caption: Contents:
 
    source/modules
+   source/whatsnew/index
 
 .. Indices and tables
 .. ==================

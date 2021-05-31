@@ -44,6 +44,8 @@ extensions = [
   'sphinx.ext.napoleon',
   'sphinx.ext.todo',
   'sphinx.ext.linkcode',
+  'IPython.sphinxext.ipython_console_highlighting',
+  'IPython.sphinxext.ipython_directive',
 ]
 
 # Napoleon options
@@ -67,6 +69,13 @@ add_module_names = True
 
 # autosummary options
 autosummary_generate = True
+
+# ipython options
+ipython_execlines = [
+  'import numpy as np',
+  'import pandas as pd',
+  'import pandas_x',
+]
 
 
 # -- Options for HTML output -------------------------------------------------
