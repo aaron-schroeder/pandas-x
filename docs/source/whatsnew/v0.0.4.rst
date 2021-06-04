@@ -1,4 +1,4 @@
-.. _whatsnew_040:
+.. _whatsnew_004:
 
 What's new in 0.0.4 (May 31, 2021)
 ----------------------------------
@@ -6,20 +6,20 @@ What's new in 0.0.4 (May 31, 2021)
 Enhancements
 ~~~~~~~~~~~~
 
-.. _whatsnew_040.s_from_xy:
+.. _whatsnew_004.s_from_xy:
 
 Cumulative distance from GPS coordinates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Added :meth:`~pandas.DataFrame.pos.s_from_xy` to calculate distance from latitude-longitude.
+Added :meth:`~pandas.DataFrame.xyz.s_from_xy` to calculate distance from latitude-longitude.
 
 .. ipython:: python
 
   df = pd.DataFrame({'lat': [40.0, 40.1, 40.2], 'lon': [-105, -105, -105]})
-  df.pos.s_from_xy()
+  df.xyz.s_from_xy()
 
 
-.. _whatsnew_040.docs:
+.. _whatsnew_004.docs:
 
 Documentation changes
 ~~~~~~~~~~~~~~~~~~~~~

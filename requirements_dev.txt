@@ -3,6 +3,7 @@ geopy>=2.1.0
 ipython>=7.24.0
 numpy>=1.19.5
 pandas>=1.2.0
+scipy
 sphinx>=3.4.3
 sphinx-autosummary-accessors>=0.2
 sphinx-rtd-theme>=0.5.2

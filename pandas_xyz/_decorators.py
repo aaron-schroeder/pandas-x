@@ -2,69 +2,26 @@ from functools import wraps
 import inspect
 from textwrap import dedent
 
-# Default field names
-_lat = 'lat'
-_lon = 'lon'
-_disp = 'displacement'
-_dist = 'distance'
-_time = 'time'
-_speed = 'speed'
 
-# Field info for docstrings
-_fields = {
-  _lat: {
-    'name': _lat,
-    'full_name': 'latitude coordinates',
-    'units': 'degrees N (-90, 90)'
-  },
-  _lon: {
-    'name': _lon,
-    'full_name': 'longitude coordinates',
-    'units': 'degrees E (-180, 180)'
-  },
-  _disp: {
-    'name': _disp,
-    'full_name': 'point-to-point displacements',
-    'units': 'meters'
-  },
-  _dist: {
-    'name': _dist,
-    'full_name': 'cumulative distances',
-    'units': 'meters'
-  },
-  _time: {
-    'name': _time,
-    'full_name': 'cumulative time from start',
-    'units': 'seconds'
-  },
-  _speed: {
-    'name': _speed,
-    'full_name': 'speed',
-    'units': 'meters per second'
-  },
-}
+def docbuild(**params):
+  """Insert argument text into decorated function's docstring.
 
+  This function easily builds function docstrings and is intended to be
+  used before wrapping the function with :meth:`docsub`.
+  
+  Args:
+    **params: The strings which would be used to format the docstring
+      templates.
+      
+  """
+  def decorator(decorated):
+    decorated.__doc__ = decorated.__doc__.format(
+      **params,
+    )
+    return decorated
 
-def series_fn(decorated):
-  argspec = inspect.getfullargspec(decorated)
-  kwds = getattr(argspec, 'args')[1:]
-  kwd_defaults = getattr(argspec, 'defaults')
+  return decorator
 
-  @doc(kwds[:-1], kwds[-1])
-  @wraps(decorated)
-  def wrapped(self, **kwargs):
-    input_cols = [
-      kwargs.get(kwd, default)
-      for kwd, default in zip(kwds[:-1], kwd_defaults[:-1])
-    ]
-
-    self._validate(*[lbl for lbl in input_cols if lbl is not None])
-
-    response = decorated(self, *input_cols).rename(kwargs.get(kwds[-1], kwd_defaults[-1]))
-
-    return response
-
-  return wrapped
 
 
 def docsub(*docstrings, **params):
@@ -111,6 +68,7 @@ def docsub(*docstrings, **params):
 
 
 def doc(output_field):
+  """Deprecated. Use :meth:`docbuild` instead."""
   def decorator(func):
 
     argspec = inspect.getfullargspec(func)

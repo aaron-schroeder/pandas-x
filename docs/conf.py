@@ -20,13 +20,13 @@ sys.path.insert(0, os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
-import pandas_x
-project = 'pandas-x'
+import pandas_xyz
+project = 'pandas-xyz'
 copyright = f'2020-{datetime.now().year}, Aaron Schroeder'
 author = 'Aaron Schroeder'
 
 # The short X.Y version.
-version = pandas_x.__version__
+version = pandas_xyz.__version__
 
 # The full version, including alpha/beta/rc tags
 release = version
@@ -74,7 +74,7 @@ autosummary_generate = True
 ipython_execlines = [
   'import numpy as np',
   'import pandas as pd',
-  'import pandas_x',
+  'import pandas_xyz',
 ]
 
 
@@ -128,15 +128,15 @@ def linkcode_resolve(domain, info):
   else:
     linespec = ''
 
-  fn = os.path.relpath(fn, start=os.path.dirname(pandas_x.__file__))
+  fn = os.path.relpath(fn, start=os.path.dirname(pandas_xyz.__file__))
 
-  # if '+' in pandas_x.__version__:
+  # if '+' in pandas_xyz.__version__:
   #     return f"https://github.com/pandas-dev/pandas/blob/master/pandas/{fn}{linespec}"
   # else:
   return (
-      f'https://github.com/aaron-schroeder/pandas-x/blob/'
+      f'https://github.com/aaron-schroeder/pandas-xyz/blob/'
       # f'master/distance/{fn}{linespec}'
-      f'v{pandas_x.__version__}/pandas_x/{fn}{linespec}'
+      f'v{pandas_xyz.__version__}/pandas_xyz/{fn}{linespec}'
   )
 
 

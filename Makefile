@@ -5,7 +5,7 @@ test:
 	python -m unittest discover -s 'tests' -p 'test*.py' -v
 
 doc:
-	# sphinx-apidoc --module-first -f -o docs/source pandas_x
+	# sphinx-apidoc --module-first -f -o docs/source pandas_xyz
 	make -C docs/ clean
 	make -C docs/ html
 
@@ -23,6 +23,13 @@ testpublish:
 	python setup.py sdist bdist_wheel
 	twine check dist/*
 	twine upload -r testpypi dist/*
+	# $(MAKE) clean
+
+publish:
+	$(MAKE) clean
+	python setup.py sdist bdist_wheel
+	twine check dist/*
+	twine upload dist/*
 	# $(MAKE) clean
 
 # clean-pyc:

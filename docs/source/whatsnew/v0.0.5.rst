@@ -1,0 +1,61 @@
+.. _whatsnew_005:
+
+What's new in 0.0.5 (June 4, 2021)
+-----------------------------------
+
+.. _whatsnew_005.name_change:
+
+Name change
+~~~~~~~~~~~
+
+After bringing in the functionality from ``py-elevation`` 
+(:ref:`see below<whatsnew_005.py_elevation>`), a name change was called for.
+
+- The package name on pip is now ``pandas-xyz``
+- The package name to import is now ``pandas_xyz``
+- The DataFrame accessor is now ``.xyz``
+
+
+Enhancements
+~~~~~~~~~~~~
+
+.. _whatsnew_005.py_elevation:
+
+Port ``py-elevation`` algorithms
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Added elevation-related algorithms to package, along with corresponding
+DataFrame accessor methods. This functionality was originally found in
+another one of my projects called ``py-elevation`` (now deprecated).
+
+Series methods:
+
+- :meth:`DataFrame.xyz.z_filter_threshold`
+- :meth:`pandas.DataFrame.xyz.z_smooth_time`
+- :meth:`DataFrame.xyz.z_smooth_distance`
+
+.. ipython:: python
+
+  df = pd.DataFrame.from_dict({
+    'elevation': [1.0 * i + np.random.normal() for i in range(30)], 
+    'distance': [5.0 * i for i in range(30)]
+  })
+  
+  df['elev_threshold'] = df.xyz.z_filter_threshold()
+  df['elev_smooth_t'] = df.xyz.z_smooth_time()
+  df['elev_smooth_d'] = df.xyz.z_smooth_distance()
+  df[['elevation', 'elev_threshold', 'elev_smooth_t', 'elev_smooth_d']]
+
+Scalar methods:
+
+  - :meth:`pandas.DataFrame.xyz.z_gain_naive`
+  - :meth:`pandas.DataFrame.xyz.z_gain_threshold`
+
+.. ipython:: python
+
+  df.xyz.z_gain_naive()
+  df.xyz.z_gain_threshold()
+
+Documentation and `README <https://github.com/aaron-schroeder/pandas-xyz/blob/master/README.md>`_
+have been updated to explain these new features.
+

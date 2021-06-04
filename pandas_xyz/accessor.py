@@ -9,20 +9,17 @@ from numpy.testing._private.utils import decorate_methods
 import pandas as pd
 
 from . import algorithms as algs
-from ._decorators import (
-  series_fn, docsub,
-  _fields, _lat, _lon, _dist, _disp, _speed, _time
-)
+from ._decorators import docsub
 
 
-@pd.api.extensions.register_dataframe_accessor('pos')
+@pd.api.extensions.register_dataframe_accessor('xyz')
 class PositionAccessor:
   """Custom accessor for a ``pandas.DataFrame`` containing data along a route.
 
   Each row of the DataFrame should correspond to a record during an
   activity or a point along a route. Each column represents a data stream.
 
-  The ``.pos`` accessor allows functions to work on the underlying data by
+  The ``.xyz`` accessor allows functions to work on the underlying data by
   specifying the columns to use in the calculations.
 
   """
@@ -60,7 +57,7 @@ class PositionAccessor:
     This class method infers which arguments in the original function expect
     pandas.Series inputs. Any positional args are assumed to refer to 
     pandas.Series, as well as any kwargs that share a name with a field defined
-    in the ``pandas_x._decorators._fields`` dict. Any kwargs that do not
+    in the ``pandas_xyz.algorithms._fields`` dict. Any kwargs that do not
     exist in this dict are preserved as-is.
     """
     
@@ -77,16 +74,15 @@ class PositionAccessor:
     df_data_req = args[:nargs-ndefs]
 
     # kwargs with recognized field names -> kwargs for column labels
-    df_data_opt = [kwd for kwd in kwds if kwd in _fields]
+    df_data_opt = [kwd for kwd in kwds if kwd in algs._fields]
 
     # kwargs that aren't recognized field names -> regular ol' kwargs
-    kwarg_params_scalar = [kwd for kwd  in kwds if kwd not in _fields]
+    kwarg_params_scalar = [kwd for kwd  in kwds if kwd not in algs._fields]
 
     @docsub(
       decorated,
       # f"""See {decorated.__name__}.""", # include full module name
       klass_in='scalar',
-      klass_out='pandas.Series',
       pre_param='**',
       pre_param_desc='column label in the record DataFrame containing ',
       post_param_desc=' If a label is not provided, '
@@ -163,5 +159,12 @@ for function in [
   algs.ds_from_xy,
   algs.s_from_xy,
   algs.reduced_point_index,
+  algs.z_filter_threshold,
+  algs.z_smooth_time,
+  algs.z_smooth_distance,
+  algs.z_flatten,
+  algs.z_gain_naive,
+  # algs.loss_naive,
+  algs.z_gain_threshold,
 ]:
   PositionAccessor._add_series_method(function)

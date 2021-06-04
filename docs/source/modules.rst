@@ -1,9 +1,9 @@
-pandas_x
-========
+pandas_xyz
+==========
 
 .. toctree::
    :maxdepth: 4
 
-   pos
+   xyz
    algorithms
    scalar

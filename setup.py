@@ -35,25 +35,26 @@ with open('README.md') as f:
 with open('LICENSE') as f:
   license = f.read()
 
-pkg_name = 'pandas_x'
+pkg_name = 'pandas_xyz'
 
 version = get_version(f'{pkg_name}/__init__.py')
 
 setup(
-  name='pandas-x',
+  name='pandas-xyz',
   version=version,
-  description='GPS/position calculation accessor for pandas DataFrames.',
+  description='Geospatial calculation accessor for pandas DataFrames.',
   long_description=readme,
   long_description_content_type='text/markdown',
   author='Aaron Schroeder',
   author_email='aaron@trailzealot.com',
   install_requires = [
-    'numpy',
-    'pandas',
+    'numpy>=1.19.5',
+    'pandas>=1.2.0',
+    'scipy',
   ],
-  url='https://github.com/aaron-schroeder/pandas-x',
+  url='https://github.com/aaron-schroeder/pandas-xyz',
   project_urls={
-    'Documentation': f'https://pandas-x.readthedocs.io/en/v{version}/',
+    'Documentation': f'https://pandas-xyz.readthedocs.io/en/v{version}/',
   },
   license='MIT',
   # license_files=('LICENSE',),

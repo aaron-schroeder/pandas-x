@@ -6,7 +6,7 @@ import pandas as pd
 import pandas.testing as tm
 import numpy as np
 
-from pandas_x import algorithms as algs
+from pandas_xyz import algorithms as algs
 
 
 class TestAlgorithms(unittest.TestCase):

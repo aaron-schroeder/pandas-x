@@ -1,6 +1,6 @@
 import unittest
 
-from pandas_x import scalar
+from pandas_xyz import scalar
 
 class TestScalar(unittest.TestCase):
   def test_compare_distance(self):

@@ -41,6 +41,7 @@ def great_circle(lon1, lat1, lon2, lat2):
 
   return d
 
+
 @docsub(
   _docstring_text
 )
