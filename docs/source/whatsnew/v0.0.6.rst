@@ -1,7 +1,7 @@
 .. _whatsnew_006:
 
 What's new in 0.0.6 (??)
-------------------------------------------
+----------------------------------
 
 These are the changes in pandas-xyz 0.0.6. See :ref:`release` for a full changelog
 including other versions of pandas-xyz.
@@ -12,10 +12,14 @@ including other versions of pandas-xyz.
 Enhancements
 ~~~~~~~~~~~~
 
-.. _whatsnew_006.enhancements.enhancement1:
+.. _whatsnew_006.resample_dist:
 
-enhancement1
-^^^^^^^^^^^^
+Create :func:`~pandas_xyz.algorithms.resample_dist` for distance-based resampling
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This function resamples a DataFrame at evenly-spaced points in a distance column
+(default name "distance"). This allows interpolation of numeric values at 
+intermediate points in a route or activity.
 
 .. _whatsnew_006.enhancements.enhancement2:
 

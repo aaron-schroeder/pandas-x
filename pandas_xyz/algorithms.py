@@ -112,6 +112,41 @@ def _clean_series(series):
   return series.fillna(method='bfill').fillna(method='ffill')
 
 
+def resample_dist(df, on='distance', sample_len=5.0, bound_lo=None, bound_hi=None):
+  """
+  Args:
+    on (str): column to use instead of index for resampling. 
+      Column must be numeric and monotonic increasing.
+  """
+
+  resample_series = df[on]
+
+  if not resample_series.is_monotonic_increasing:
+    raise ValueError('Resampling column must be monotonic increasing')
+  
+  bound_lo = bound_lo or resample_series.iloc[0]  
+  bound_hi = bound_hi or resample_series.iloc[-1]
+  
+  n_sample = math.ceil(
+    (resample_series.iloc[-1] - resample_series.iloc[0]) / sample_len
+  )
+  resample_series_ds = np.linspace(
+    bound_lo,
+    bound_hi, 
+    n_sample + 1
+  )
+
+  return df.set_index(on
+    ).reindex(
+      resample_series_ds
+    ).interpolate(
+      kind='linear'
+      # kind='quadratic'
+      # kind='cubic'
+    # )
+    ).reset_index()
+
+
 @docsub(**_docstring_params)
 # @doc('displacement')
 @docbuild(**_docstring_field_params)
@@ -470,16 +505,12 @@ def z_smooth_distance(
 
   # Subsample elevation data in evenly-spaced intervals, with each
   # point representing elevation value at the interval midpoint.
-  n_sample = math.ceil(
-    (distance.iloc[-1] - distance.iloc[0]) / sample_len
+  # HACK:
+  df = pd.DataFrame(dict(distance=distance, elevation=elevation))  
+  df_ds = resample_dist(df, 
+    on='distance',  # default
+    sample_len=sample_len
   )
-  distance_ds = np.linspace(
-    distance.iloc[0],
-    distance.iloc[-1], 
-    n_sample + 1
-  )
-  interp_fn = interp1d(distance, elevation, kind='linear')
-  elevation_ds = interp_fn(distance_ds)
 
   # Pass downsampled data through a Savitzky-Golay filter (attenuating
   # high-frequency noise). Calculate elevations at the original distance
@@ -490,7 +521,7 @@ def z_smooth_distance(
     warnings.simplefilter(action='ignore', category=FutureWarning)
     warnings.simplefilter(action='ignore', category=RuntimeWarning)
 
-    elevation_sg = savgol_filter(elevation_ds, window_len, polyorder)
+    elevation_sg = savgol_filter(df_ds['elevation'], window_len, polyorder)
 
   # (At this point, the NREL algorithm would throw out raw elevation
   # values that drastically differed from the filtered values, then
@@ -503,7 +534,7 @@ def z_smooth_distance(
   # Backfill the elevation values at the original distance coordinates
   # by interpolation between the downsampled, smoothed points.
   interp_function = interp1d(
-    distance_ds,
+    df_ds['distance'],
     elevation_sg, 
     #fill_value='extrapolate', kind='linear',
     fill_value='extrapolate', kind='quadratic',
